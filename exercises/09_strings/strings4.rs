@@ -1,5 +1,48 @@
 // Calls of this function should be replaced with calls of `string_slice` or `string`.
-fn placeholder() {}
+fn trim_me(input: &str) -> &str {
+    // TODO: Remove whitespace from both ends of a string.
+    input.trim_end()
+}
+
+fn compose_me(input: &str) -> String {
+    // TODO: Add " world!" to the string! There are multiple ways to do this.
+    input.to_string() + " world!"
+}
+
+fn replace_me(input: &str) -> String {
+    // TODO: Replace "cars" in the string with "balloons".
+    input.replace("cars", "balloons")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn trim_a_string() {
+        assert_eq!(trim_me("Hello!     "), "Hello!");
+        assert_eq!(trim_me("  What's up!"), "What's up!");
+        assert_eq!(trim_me("   Hola!  "), "Hola!");
+    }
+
+    #[test]
+    fn compose_a_string() {
+        assert_eq!(compose_me("Hello"), "Hello world!");
+        assert_eq!(compose_me("Goodbye"), "Goodbye world!");
+    }
+
+    #[test]
+    fn replace_a_string() {
+        assert_eq!(
+            replace_me("I think cars are cool"),
+            "I think balloons are cool",
+        );
+        assert_eq!(
+            replace_me("I love to look at cars"),
+            "I love to look at balloons",
+        );
+    }
+}
 
 fn string_slice(arg: &str) {
     println!("{arg}");
@@ -13,25 +56,25 @@ fn string(arg: String) {
 // Your task is to replace `placeholder(…)` with either `string_slice(…)`
 // or `string(…)` depending on what you think each value is.
 fn main() {
-    placeholder("blue");
+    string_slice("blue");
 
-    placeholder("red".to_string());
+    string("red".to_string());
 
-    placeholder(String::from("hi"));
+    string(String::from("hi"));
 
-    placeholder("rust is fun!".to_owned());
+    string("rust is fun!".to_owned());
 
-    placeholder("nice weather".into());
+    string("nice weather".into());
 
-    placeholder(format!("Interpolation {}", "Station"));
+    string(format!("Interpolation {}", "Station"));
 
     // WARNING: This is byte indexing, not character indexing.
     // Character indexing can be done using `s.chars().nth(INDEX)`.
-    placeholder(&String::from("abc")[0..1]);
+    string_slice(&String::from("abc")[0..1]);
 
-    placeholder("  hello there ".trim());
+    string_slice("  hello there ".trim());
 
-    placeholder("Happy Monday!".replace("Mon", "Tues"));
+    string("Happy Monday!".replace("Mon", "Tues"));
 
-    placeholder("mY sHiFt KeY iS sTiCkY".to_lowercase());
+    string("mY sHiFt KeY iS sTiCkY".to_lowercase());
 }
